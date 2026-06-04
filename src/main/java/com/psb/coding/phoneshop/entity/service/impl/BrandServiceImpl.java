@@ -1,13 +1,13 @@
 package com.psb.coding.phoneshop.entity.service.impl;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 
 import com.psb.coding.phoneshop.entity.Brand;
 import com.psb.coding.phoneshop.entity.repository.BrandRepository;
 import com.psb.coding.phoneshop.entity.service.BrandService;
-import com.psb.coding.phoneshop.exception.ApiException;
 import com.psb.coding.phoneshop.exception.ResourceNotFoundException;
 
 @Service
@@ -45,5 +45,15 @@ public class BrandServiceImpl implements BrandService {
 		Brand brand = getById(id);
 		brandRepository.delete(brandDelete);
 		return brand;
+	}
+
+	@Override
+	public List<Brand> getBrands() {
+		return brandRepository.findAll();
+	}
+
+	@Override
+	public List<Brand> getBrands(String name) {
+		return brandRepository.findByNameIgnoreCase(name);
 	}
 }
