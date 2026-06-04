@@ -54,6 +54,6 @@ public class BrandServiceImpl implements BrandService {
 
 	@Override
 	public List<Brand> getBrands(String name) {
-		return brandRepository.findByNameIgnoreCase(name);
+		return brandRepository.findByNameContaining(name);
 	}
 }
