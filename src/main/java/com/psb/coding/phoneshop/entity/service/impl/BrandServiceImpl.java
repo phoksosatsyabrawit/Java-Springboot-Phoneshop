@@ -1,13 +1,18 @@
 package com.psb.coding.phoneshop.entity.service.impl;
 
-import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
 
 import com.psb.coding.phoneshop.entity.Brand;
+import com.psb.coding.phoneshop.entity.pagination.util.PageUtil;
 import com.psb.coding.phoneshop.entity.repository.BrandRepository;
 import com.psb.coding.phoneshop.entity.service.BrandService;
+import com.psb.coding.phoneshop.entity.spec.BrandFilter;
+import com.psb.coding.phoneshop.entity.spec.BrandSpec;
 import com.psb.coding.phoneshop.exception.ResourceNotFoundException;
 
 @Service
@@ -48,12 +53,31 @@ public class BrandServiceImpl implements BrandService {
 	}
 
 	@Override
-	public List<Brand> getBrands() {
-		return brandRepository.findAll();
-	}
-
-	@Override
-	public List<Brand> getBrands(String name) {
-		return brandRepository.findByNameContaining(name);
+	public Page<Brand> getBrands(Map<String, String> params) {// build dynamic query statement
+		BrandFilter brandFilter = new BrandFilter();
+		
+		if(params.containsKey("name")) {
+			String name = params.get("name");
+			brandFilter.setName(name);
+		}
+		if(params.containsKey("id")) {
+			String id = params.get("id");
+			brandFilter.setId(Integer.parseInt(id));
+		}
+		//TODO add to function for pageable
+		int pageLimit = PageUtil.DEFAULT_PAGE_LIMIT;
+		if(params.containsKey(PageUtil.PAGE_LIMIT)) {
+			pageLimit = Integer.parseInt(params.get(PageUtil.PAGE_LIMIT));
+		}
+		int pageNumber = PageUtil.DEFAULT_PAGE_NUMBER;
+		if(params.containsKey(PageUtil.PAGE_NUMBER)) {
+			pageNumber = Integer.parseInt(params.get(PageUtil.PAGE_NUMBER));
+		}
+		
+		BrandSpec brandSpec = new BrandSpec(brandFilter);
+		
+		PageRequest pageRequest = PageUtil.pageRequest(pageNumber, pageLimit);
+		
+		return brandRepository.findAll(brandSpec, pageRequest);
 	}
 }

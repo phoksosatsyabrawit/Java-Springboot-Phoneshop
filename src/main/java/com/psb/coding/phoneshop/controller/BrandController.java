@@ -1,9 +1,9 @@
 package com.psb.coding.phoneshop.controller;
 
-import java.util.List;
-import java.util.stream.Collectors;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.psb.coding.phoneshop.dto.BrandDTO;
+import com.psb.coding.phoneshop.dto.PageDTO;
 import com.psb.coding.phoneshop.entity.Brand;
 import com.psb.coding.phoneshop.entity.service.BrandService;
 import com.psb.coding.phoneshop.mapper.BrandMapper;
@@ -41,34 +42,28 @@ public class BrandController {
 	}
 	
 	@GetMapping
-	public ResponseEntity<?> getBrands(){
-		List<BrandDTO> listBrand = brandService.getBrands()
+	public ResponseEntity<?> getBrands(@RequestParam Map<String, String> params){ //Use Map<K,V> to resolve multiple parameter
+		/*List<BrandDTO> listBrand = brandService.getBrands(params)
 		.stream()
 		.map(brand -> BrandMapper.INSTANCE.toBrandDTO(brand))
-		.collect(Collectors.toList());
-		return ResponseEntity.ok(listBrand);
-	}
-	
-	@GetMapping(path = "/filter")
-	public ResponseEntity<?> getBrands(@RequestParam String name){
-		List<BrandDTO> listBrand = brandService.getBrands(name)
-		.stream()
-		.map(brand -> BrandMapper.INSTANCE.toBrandDTO(brand))
-		.collect(Collectors.toList());
-		return ResponseEntity.ok(listBrand);
+		.collect(Collectors.toList());*/
+		Page<Brand> pageBrand = brandService.getBrands(params);
+		
+		PageDTO pageDTO = new PageDTO(pageBrand);
+		return ResponseEntity.ok(pageDTO);
 	}
 	
 	@PutMapping("{id}")
 	public ResponseEntity<?> updateBrand(@PathVariable Integer id, @RequestBody BrandDTO brandDTO){
 		Brand brand = BrandMapper.INSTANCE.toBrand(brandDTO);
 		Brand update = brandService.update(id, brand);
-		return ResponseEntity.ok(BrandMapper.INSTANCES.toBrandDTO(update));
+		return ResponseEntity.ok(BrandMapper.INSTANCE.toBrandDTO(update));
 	}
 	
 	@DeleteMapping("{id}")
 	public ResponseEntity<?> deleteBrand(@PathVariable Integer id, @RequestBody BrandDTO brandDTO){
 		Brand brand = BrandMapper.INSTANCE.toBrand(brandDTO);
 		Brand delete = brandService.delete(id, brand);
-		return ResponseEntity.ok(BrandMapper.INSTANCES.toBrandDTO(delete));
+		return ResponseEntity.ok(BrandMapper.INSTANCE.toBrandDTO(delete));
 	}
 }
