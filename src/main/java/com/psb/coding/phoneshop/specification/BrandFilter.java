@@ -1,4 +1,4 @@
-package com.psb.coding.phoneshop.entity.spec;
+package com.psb.coding.phoneshop.specification;
 
 import lombok.Data;
 

@@ -1,4 +1,4 @@
-package com.psb.coding.phoneshop.entity.service.impl;
+package com.psb.coding.phoneshop.service.impl;
 
 import java.util.Map;
 
@@ -8,12 +8,12 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import com.psb.coding.phoneshop.entity.Brand;
-import com.psb.coding.phoneshop.entity.page.util.PageUtil;
-import com.psb.coding.phoneshop.entity.repository.BrandRepository;
-import com.psb.coding.phoneshop.entity.service.BrandService;
-import com.psb.coding.phoneshop.entity.spec.BrandFilter;
-import com.psb.coding.phoneshop.entity.spec.BrandSpec;
 import com.psb.coding.phoneshop.exception.ResourceNotFoundException;
+import com.psb.coding.phoneshop.page.util.PageUtil;
+import com.psb.coding.phoneshop.repository.BrandRepository;
+import com.psb.coding.phoneshop.service.BrandService;
+import com.psb.coding.phoneshop.specification.BrandFilter;
+import com.psb.coding.phoneshop.specification.BrandSpec;
 
 @Service
 public class BrandServiceImpl implements BrandService {

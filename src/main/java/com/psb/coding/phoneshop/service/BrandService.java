@@ -1,4 +1,4 @@
-package com.psb.coding.phoneshop.entity.service;
+package com.psb.coding.phoneshop.service;
 
 import java.util.Map;
 

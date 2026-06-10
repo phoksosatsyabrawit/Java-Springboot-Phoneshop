@@ -1,4 +1,4 @@
-package com.psb.coding.phoneshop.entity.page.util;
+package com.psb.coding.phoneshop.page.util;
 
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;

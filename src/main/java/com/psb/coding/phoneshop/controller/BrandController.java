@@ -18,8 +18,8 @@ import org.springframework.web.bind.annotation.RestController;
 import com.psb.coding.phoneshop.dto.BrandDTO;
 import com.psb.coding.phoneshop.dto.PageDTO;
 import com.psb.coding.phoneshop.entity.Brand;
-import com.psb.coding.phoneshop.entity.service.BrandService;
 import com.psb.coding.phoneshop.mapper.BrandMapper;
+import com.psb.coding.phoneshop.service.BrandService;
 
 @RestController
 @RequestMapping(path = "/brands")

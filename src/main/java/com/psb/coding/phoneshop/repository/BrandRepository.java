@@ -1,4 +1,4 @@
-package com.psb.coding.phoneshop.entity.repository;
+package com.psb.coding.phoneshop.repository;
 
 import java.util.List;
 
