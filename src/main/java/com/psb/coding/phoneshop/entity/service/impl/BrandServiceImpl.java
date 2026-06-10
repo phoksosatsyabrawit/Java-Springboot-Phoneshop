@@ -4,11 +4,11 @@ import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
-import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import com.psb.coding.phoneshop.entity.Brand;
-import com.psb.coding.phoneshop.entity.pagination.util.PageUtil;
+import com.psb.coding.phoneshop.entity.page.util.PageUtil;
 import com.psb.coding.phoneshop.entity.repository.BrandRepository;
 import com.psb.coding.phoneshop.entity.service.BrandService;
 import com.psb.coding.phoneshop.entity.spec.BrandFilter;
@@ -53,31 +53,54 @@ public class BrandServiceImpl implements BrandService {
 	}
 
 	@Override
-	public Page<Brand> getBrands(Map<String, String> params) {// build dynamic query statement
+	public Page<Brand> getBrands(Map<String, String> params) { // dynamic query + pagination
 		BrandFilter brandFilter = new BrandFilter();
-		
 		if(params.containsKey("name")) {
 			String name = params.get("name");
 			brandFilter.setName(name);
 		}
 		if(params.containsKey("id")) {
-			String id = params.get("id");
-			brandFilter.setId(Integer.parseInt(id));
+			int id = Integer.parseInt(params.get("id"));
+			brandFilter.setId(id);
 		}
-		//TODO add to function for pageable
-		int pageLimit = PageUtil.DEFAULT_PAGE_LIMIT;
-		if(params.containsKey(PageUtil.PAGE_LIMIT)) {
-			pageLimit = Integer.parseInt(params.get(PageUtil.PAGE_LIMIT));
-		}
-		int pageNumber = PageUtil.DEFAULT_PAGE_NUMBER;
+		
+		Integer pageNumber = PageUtil.DEFAULT_PAGE_NUMBER;
 		if(params.containsKey(PageUtil.PAGE_NUMBER)) {
 			pageNumber = Integer.parseInt(params.get(PageUtil.PAGE_NUMBER));
+		}
+		Integer pageLimit = PageUtil.DEFAULT_PAGE_LIMIT;
+		if(params.containsKey(PageUtil.PAGE_LIMIT)) {
+			pageLimit = Integer.parseInt(params.get(PageUtil.PAGE_LIMIT));
 		}
 		
 		BrandSpec brandSpec = new BrandSpec(brandFilter);
 		
-		PageRequest pageRequest = PageUtil.pageRequest(pageNumber, pageLimit);
+		Pageable pageable = PageUtil.pageRequest(pageNumber, pageLimit);
 		
-		return brandRepository.findAll(brandSpec, pageRequest);
+		Page<Brand> page = brandRepository.findAll(brandSpec, pageable);
+		
+		return page;
 	}
+	
+	/*@Override
+	public List<Brand> getBrands(Map<String, String> params) { // dynamic query
+		BrandFilter brandFilter = new BrandFilter();
+		if(params.containsKey("name")) {
+			String name = params.get("name");
+			brandFilter.setName(name);
+		}
+		if(params.containsKey("id")) {
+			int id = Integer.parseInt(params.get("id"));
+			brandFilter.setId(id);
+		}
+		BrandSpec brandSpec = new BrandSpec(brandFilter);
+		List<Brand> listBrands = brandRepository.findAll(brandSpec);
+		return listBrands;
+	}*/
+
+	/*@Override
+	public List<Brand> getBrands(String name) { // get all brands
+		List<Brand> list = brandRepository.findByNameLike("%" + name + "%");
+		return list;
+	}*/
 }

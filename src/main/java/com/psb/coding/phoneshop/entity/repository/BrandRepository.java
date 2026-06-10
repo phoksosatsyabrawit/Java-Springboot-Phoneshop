@@ -12,4 +12,5 @@ import com.psb.coding.phoneshop.entity.Brand;
 public interface BrandRepository extends JpaRepository<Brand, Integer>, JpaSpecificationExecutor<Brand> {
 
 	List<Brand> findByNameContaining(String name);
+	List<Brand> findByNameLike(String name);
 }

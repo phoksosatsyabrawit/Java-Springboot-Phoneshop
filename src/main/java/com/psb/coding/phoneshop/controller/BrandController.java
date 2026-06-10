@@ -42,16 +42,12 @@ public class BrandController {
 	}
 	
 	@GetMapping
-	public ResponseEntity<?> getBrands(@RequestParam Map<String, String> params){ //Use Map<K,V> to resolve multiple parameter
-		/*List<BrandDTO> listBrand = brandService.getBrands(params)
-		.stream()
-		.map(brand -> BrandMapper.INSTANCE.toBrandDTO(brand))
-		.collect(Collectors.toList());*/
-		Page<Brand> pageBrand = brandService.getBrands(params);
-		
-		PageDTO pageDTO = new PageDTO(pageBrand);
+	public ResponseEntity<?> getBrands(@RequestParam Map<String, String> params){
+		Page<Brand> page = brandService.getBrands(params);
+		PageDTO pageDTO = new PageDTO(page);
 		return ResponseEntity.ok(pageDTO);
 	}
+	
 	
 	@PutMapping("{id}")
 	public ResponseEntity<?> updateBrand(@PathVariable Integer id, @RequestBody BrandDTO brandDTO){
@@ -66,4 +62,16 @@ public class BrandController {
 		Brand delete = brandService.delete(id, brand);
 		return ResponseEntity.ok(BrandMapper.INSTANCE.toBrandDTO(delete));
 	}
+	
+	/*@GetMapping
+	public ResponseEntity<?> getBrands(@RequestParam Map<String, String> params){ // dynamic query
+		List<Brand> brands = brandService.getBrands(params);
+		return ResponseEntity.ok(brands);
+	}*/
+	
+	/*@GetMapping
+	public ResponseEntity<?> getBrands(@RequestParam String name){
+		List<Brand> listBrands = brandService.getBrands(name);
+		return ResponseEntity.ok(listBrands);
+	}*/
 }

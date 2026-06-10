@@ -8,20 +8,20 @@ import lombok.Data;
 
 @Data
 public class PageDTO {
-	private List<?> pageList;
+
+	private List<?> page;
 	private PaginationDTO pagination;
 	
 	public PageDTO(Page<?> page) {
-		this.pageList = page.getContent();
+		this.page = page.getContent();
 		this.pagination = PaginationDTO.builder()
-				.empty(page.isEmpty())
+				.pageNumber(page.getNumber() + 1)
+				.pageSize(page.getSize())
+				.totalElements(page.getTotalElements())
+				.totalPages(page.getTotalPages())
 				.first(page.isFirst())
 				.last(page.isLast())
-				.pageSize(page.getPageable().getPageSize())
-				.pageNumber(page.getPageable().getPageNumber() + 1)
-				.totalPages(page.getTotalPages())
-				.totalElements(page.getTotalElements())
-				.numberOfElements(page.getNumberOfElements())
+				.empty(page.isEmpty())
 				.build();
 	}
 }
