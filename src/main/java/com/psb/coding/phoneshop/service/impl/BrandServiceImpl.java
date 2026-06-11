@@ -15,11 +15,14 @@ import com.psb.coding.phoneshop.service.BrandService;
 import com.psb.coding.phoneshop.specification.BrandFilter;
 import com.psb.coding.phoneshop.specification.BrandSpec;
 
+import lombok.RequiredArgsConstructor;
+
 @Service
+@RequiredArgsConstructor
 public class BrandServiceImpl implements BrandService {
 
 	@Autowired
-	private BrandRepository brandRepository;
+	private final BrandRepository brandRepository;
 	
 	@Override
 	public Brand create(Brand brand) {
