@@ -31,14 +31,14 @@ public class BrandServiceImpl implements BrandService {
 	
 	@Override
 	public Brand getById(Integer id) {
+		return brandRepository.findById(id)
+				.orElseThrow(() -> new ResourceNotFoundException("Brand", id));
 		/*Optional<Brand> brandOptional = brandRepository.findById(id);
 		if(brandOptional.isPresent()) {
 			return brandOptional.get();
 		}
 		throw new HttpClientErrorException(HttpStatus.NOT_FOUND, "Brand with id = %d not found".formatted(id));
 		*/
-		return brandRepository.findById(id)
-				.orElseThrow(() -> new ResourceNotFoundException("Brand", id));
 	}
 
 	@Override
