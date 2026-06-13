@@ -2,7 +2,6 @@ package com.psb.coding.phoneshop.service.impl;
 
 import java.util.Map;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
@@ -21,7 +20,6 @@ import lombok.RequiredArgsConstructor;
 @RequiredArgsConstructor
 public class BrandServiceImpl implements BrandService {
 
-	@Autowired
 	private final BrandRepository brandRepository;
 	
 	@Override

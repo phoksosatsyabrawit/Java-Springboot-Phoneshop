@@ -13,8 +13,11 @@ import com.psb.coding.phoneshop.service.BrandService;
 public interface ModelMapper {
 	ModelMapper INSTANCE = Mappers.getMapper(ModelMapper.class);
 	
-	@Mapping(source = "brandId", target = "brand")
+	@Mapping(source = "brandId", target = "brand.id")
 	Model toModel(ModelDTO dto);
+	
+	@Mapping(source = "brand.id", target = "brandId")
+	ModelDTO toModelDTO(Model entity);
 	
 	/*default Brand toBrand(Integer brnId) {
 		Brand brand = new Brand();

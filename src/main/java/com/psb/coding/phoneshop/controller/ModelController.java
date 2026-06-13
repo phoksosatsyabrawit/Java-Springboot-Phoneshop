@@ -1,7 +1,13 @@
 package com.psb.coding.phoneshop.controller;
 
+import java.util.List;
+
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.DeleteMapping;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -25,6 +31,30 @@ public class ModelController { // inject dependency through constructor
 	public ResponseEntity<?> createModel(@RequestBody ModelDTO modelDTO){
 		/*Model model = modelService.save(modelMapper.toModel(modelDTO));*/
 		Model model = modelService.save(modelDTO);
-		return ResponseEntity.ok(model);
+		return ResponseEntity.ok(ModelMapper.INSTANCE.toModelDTO(model));
+	}
+	
+	@GetMapping("{id}")
+	public ResponseEntity<?> getById(@PathVariable Integer id){
+		Model modelId = modelService.getById(id);
+		return ResponseEntity.ok(modelId);
+	}
+	
+	@GetMapping
+	public ResponseEntity<?> getModels(){
+		List<Model> models = modelService.getModels();
+		return ResponseEntity.ok(models);
+	}
+	
+	@PutMapping("{id}")
+	public ResponseEntity<?> updateModel(@PathVariable Integer id, @RequestBody ModelDTO dto){
+		Model update = modelService.update(id, dto);
+		return ResponseEntity.ok(ModelMapper.INSTANCE.toModelDTO(update));
+	}
+	
+	@DeleteMapping("{id}")
+	public ResponseEntity<?> deleteModel(@PathVariable Integer id){
+		Model delete = modelService.delete(id);
+		return ResponseEntity.ok(delete);
 	}
 }
