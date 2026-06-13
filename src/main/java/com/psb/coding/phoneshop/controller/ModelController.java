@@ -25,31 +25,34 @@ import lombok.RequiredArgsConstructor;
 public class ModelController { // inject dependency through constructor
 
 	private final ModelService modelService;
-	/*private final ModelMapper modelMapper;*/
+	private final ModelMapper modelMapper;
 	
 	@PostMapping
 	public ResponseEntity<?> createModel(@RequestBody ModelDTO modelDTO){
 		/*Model model = modelService.save(modelMapper.toModel(modelDTO));*/
 		Model model = modelService.save(modelDTO);
-		return ResponseEntity.ok(ModelMapper.INSTANCE.toModelDTO(model));
+		return ResponseEntity.ok(modelMapper.toModelDTO(model));
 	}
 	
 	@GetMapping("{id}")
 	public ResponseEntity<?> getById(@PathVariable Integer id){
 		Model modelId = modelService.getById(id);
-		return ResponseEntity.ok(modelId);
+		return ResponseEntity.ok(modelMapper.toModelDTO(modelId));
 	}
 	
 	@GetMapping
 	public ResponseEntity<?> getModels(){
 		List<Model> models = modelService.getModels();
-		return ResponseEntity.ok(models);
+		List<ModelDTO> listModels = models.stream()
+		.map(modelMapper::toModelDTO)
+		.toList();
+		return ResponseEntity.ok(listModels);
 	}
 	
 	@PutMapping("{id}")
 	public ResponseEntity<?> updateModel(@PathVariable Integer id, @RequestBody ModelDTO dto){
 		Model update = modelService.update(id, dto);
-		return ResponseEntity.ok(ModelMapper.INSTANCE.toModelDTO(update));
+		return ResponseEntity.ok(modelMapper.toModelDTO(update));
 	}
 	
 	@DeleteMapping("{id}")

@@ -1,8 +1,8 @@
 package com.psb.coding.phoneshop.controller;
 
+import java.util.List;
 import java.util.Map;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -16,17 +16,26 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.psb.coding.phoneshop.dto.BrandDTO;
+import com.psb.coding.phoneshop.dto.ModelDTO;
 import com.psb.coding.phoneshop.dto.PageDTO;
 import com.psb.coding.phoneshop.entity.Brand;
+import com.psb.coding.phoneshop.entity.Model;
 import com.psb.coding.phoneshop.mapper.BrandMapper;
+import com.psb.coding.phoneshop.mapper.ModelMapper;
 import com.psb.coding.phoneshop.service.BrandService;
+import com.psb.coding.phoneshop.service.ModelService;
 
+import lombok.RequiredArgsConstructor;
+
+@RequiredArgsConstructor
 @RestController
 @RequestMapping(path = "/brands")
 public class BrandController {
 	
-	@Autowired
-	private BrandService brandService;
+	private final BrandService brandService;
+	private final ModelService modelService;
+	private final ModelMapper modelMapper;
+	
 
 	@PostMapping
 	public ResponseEntity<?> createBrand(@RequestBody BrandDTO brandDTO){
@@ -61,6 +70,15 @@ public class BrandController {
 		Brand brand = BrandMapper.INSTANCE.toBrand(brandDTO);
 		Brand delete = brandService.delete(id, brand);
 		return ResponseEntity.ok(BrandMapper.INSTANCE.toBrandDTO(delete));
+	}
+	
+	@GetMapping("{id}/models")
+	public ResponseEntity<?> getModelsByBrand(@PathVariable Integer id){
+		List<Model> findByBrands = modelService.getByBrand(id);
+		List<ModelDTO> lists = findByBrands.stream()
+		.map(modelMapper::toModelDTO)
+		.toList();
+		return ResponseEntity.ok(lists);
 	}
 	
 	/*@GetMapping

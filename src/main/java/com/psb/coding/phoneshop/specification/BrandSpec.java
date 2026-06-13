@@ -13,7 +13,10 @@ import jakarta.persistence.criteria.CriteriaQuery;
 import jakarta.persistence.criteria.Predicate;
 import jakarta.persistence.criteria.Root;
 import lombok.Data;
+import lombok.RequiredArgsConstructor;
 
+@SuppressWarnings("serial")
+@RequiredArgsConstructor
 @Data
 public class BrandSpec implements Specification<Brand> {
 

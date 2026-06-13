@@ -17,17 +17,14 @@ import lombok.RequiredArgsConstructor;
 @Service
 public class ModelServiceImpl implements ModelService { // inject through constructor
 	
-	
 	private final ModelRepository modelRepository;
-	private final ModelMapper modelMapper;
-	
 	/*private BrandService brandService;*/
 
 	@Override
 	public Model save(ModelDTO modelDTO) {
 		/*Integer brandId = model.getBrand().getId();
 		brandService.getById(brandId);*/
-		Model model = modelMapper.toModel(modelDTO);
+		Model model = ModelMapper.INSTANCE.toModel(modelDTO);
 		return modelRepository.save(model);
 	}
 
@@ -54,6 +51,11 @@ public class ModelServiceImpl implements ModelService { // inject through constr
 		Model model = getById(id);
 		modelRepository.delete(model);
 		return model;
+	}
+
+	@Override
+	public List<Model> getByBrand(Integer id) {
+		return modelRepository.findByBrandId(id);
 	}
 	
 }

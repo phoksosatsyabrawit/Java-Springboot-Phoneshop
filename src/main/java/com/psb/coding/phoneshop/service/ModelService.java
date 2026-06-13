@@ -11,4 +11,5 @@ public interface ModelService {
 	List<Model> getModels();
 	Model update(Integer id, ModelDTO modelUpdate);
 	Model delete(Integer id);
+	List<Model> getByBrand(Integer id);
 }
