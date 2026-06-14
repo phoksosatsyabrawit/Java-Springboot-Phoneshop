@@ -2,10 +2,18 @@ spring:
   datasource:
     url: jdbc:postgresql://localhost:5432/phoneshop
     username: admin
-    password: braw$tadmin95
+    password: brawitadmin95
   jpa:
     properties:
-     hibernate:
-     dialect: org.hibernate.dialect.PostgreSQLDialect
+      hibernate:
+        dialect: org.hibernate.dialect.PostgreSQLDialect
     hibernate:
-      ddl-auto: update
+      ddl-auto: none
+    open-in-view: false
+  liquibase:
+    change-log: classpath:db/changelog/db.changelog-master.yml
+    enabled: true
+logging:
+  level:
+    liquibase: DEBUG
+

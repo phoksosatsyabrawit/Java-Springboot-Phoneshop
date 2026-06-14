@@ -36,7 +36,6 @@ public class BrandController {
 	private final ModelService modelService;
 	private final ModelMapper modelMapper;
 	
-
 	@PostMapping
 	public ResponseEntity<?> createBrand(@RequestBody BrandDTO brandDTO){
 		Brand brand = BrandMapper.INSTANCE.toBrand(brandDTO);
