@@ -53,11 +53,11 @@ public class BrandServiceTest {
 	public void testGetById() {
 		//given
 		Brand brand = new Brand();
-		brand.setId(1);
+		brand.setId(1L);
 		brand.setName("Apple");
 		//when
-		when(brandRepository.findById(1)).thenReturn(Optional.of(brand));
-		Brand byIdReturn = brandService.getById(1);
+		when(brandRepository.findById(1L)).thenReturn(Optional.of(brand));
+		Brand byIdReturn = brandService.getById(1L);
 		//then
 		assertEquals(1, byIdReturn.getId());
 		assertEquals("Apple", byIdReturn.getName());
@@ -67,9 +67,9 @@ public class BrandServiceTest {
 	public void testGetByIdThrow() {
 		//given
 		//when
-		when(brandRepository.findById(1)).thenReturn(Optional.empty());
+		when(brandRepository.findById(1L)).thenReturn(Optional.empty());
 		
-		assertThatThrownBy(() -> brandService.getById(1))
+		assertThatThrownBy(() -> brandService.getById(1L))
 		.isInstanceOf(ResourceNotFoundException.class).hasMessage("Brand with id = 1 not found");
 		//.hasMessageContaining("not found");
 		//.hasMessage("%s with id = %d not found", "Brand", 1);
@@ -80,7 +80,7 @@ public class BrandServiceTest {
 	public void testCreates() { //V1
 		//given
 		Brand brand = new Brand();
-		brand.setId(1);
+		brand.setId(1L);
 		brand.setName("Apple");
 		//when
 		when(brandRepository.save(any(Brand.class))).thenReturn(brand);

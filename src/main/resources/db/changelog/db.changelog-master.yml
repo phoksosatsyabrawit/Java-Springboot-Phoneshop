@@ -3,3 +3,7 @@ databaseChangeLog:
       file: db/changelog/001_init_db_schema.yml
   - include:
       file: db/changelog/002_insert_brands.yml
+  - include:
+      file: db/changelog/003_rename_models_column.yml
+  - include:
+      file: db/changelog/004_create_table.yml

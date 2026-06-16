@@ -35,7 +35,7 @@ public class ModelController { // inject dependency through constructor
 	}
 	
 	@GetMapping("{id}")
-	public ResponseEntity<?> getById(@PathVariable Integer id){
+	public ResponseEntity<?> getById(@PathVariable Long id){
 		Model modelId = modelService.getById(id);
 		return ResponseEntity.ok(modelMapper.toModelDTO(modelId));
 	}
@@ -50,13 +50,13 @@ public class ModelController { // inject dependency through constructor
 	}
 	
 	@PutMapping("{id}")
-	public ResponseEntity<?> updateModel(@PathVariable Integer id, @RequestBody ModelDTO dto){
+	public ResponseEntity<?> updateModel(@PathVariable Long id, @RequestBody ModelDTO dto){
 		Model update = modelService.update(id, dto);
 		return ResponseEntity.ok(modelMapper.toModelDTO(update));
 	}
 	
 	@DeleteMapping("{id}")
-	public ResponseEntity<?> deleteModel(@PathVariable Integer id){
+	public ResponseEntity<?> deleteModel(@PathVariable Long id){
 		Model delete = modelService.delete(id);
 		return ResponseEntity.ok(delete);
 	}

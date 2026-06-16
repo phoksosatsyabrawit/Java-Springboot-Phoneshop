@@ -29,7 +29,7 @@ public class ModelServiceImpl implements ModelService { // inject through constr
 	}
 
 	@Override
-	public Model getById(Integer id) {
+	public Model getById(Long id) {
 		return modelRepository.findById(id)
 				.orElseThrow(() -> new ResourceNotFoundException("Model", id));
 	}
@@ -40,21 +40,21 @@ public class ModelServiceImpl implements ModelService { // inject through constr
 	}
 
 	@Override
-	public Model update(Integer id, ModelDTO modelUpdate) {
+	public Model update(Long id, ModelDTO modelUpdate) {
 		Model model = getById(id);
 		model.setName(modelUpdate.getName());
 		return modelRepository.save(model);
 	}
 
 	@Override
-	public Model delete(Integer id) {
+	public Model delete(Long id) {
 		Model model = getById(id);
 		modelRepository.delete(model);
 		return model;
 	}
 
 	@Override
-	public List<Model> getByBrand(Integer id) {
+	public List<Model> getByBrand(Long id) {
 		return modelRepository.findByBrandId(id);
 	}
 	

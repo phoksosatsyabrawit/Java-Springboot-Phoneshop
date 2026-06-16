@@ -11,6 +11,7 @@ import com.psb.coding.phoneshop.service.BrandService;
 
 @Mapper(componentModel = "spring", uses = {BrandService.class})
 public interface ModelMapper {
+	
 	ModelMapper INSTANCE = Mappers.getMapper(ModelMapper.class);
 	
 	@Mapping(source = "brandId", target = "brand.id")
