@@ -1,0 +1,9 @@
+databaseChangeLog:
+  - changeSet:
+      id: 004_rename_importDate_column
+      author: phoksosatsyabrawit@gmail.com
+      changes:
+        - renameColumn:
+            tableName: product_import_history
+            oldColumnName: date_import
+            newColumnName: import_date

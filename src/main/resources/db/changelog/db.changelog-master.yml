@@ -7,3 +7,5 @@ databaseChangeLog:
       file: db/changelog/003_rename_models_column.yml
   - include:
       file: db/changelog/004_create_table.yml
+  - include:
+      file: db/changelog/005_rename_importDate_column.yml

@@ -13,7 +13,15 @@ spring:
   liquibase:
     change-log: classpath:db/changelog/db.changelog-master.yml
     enabled: true
-logging:
-  level:
-    liquibase: DEBUG
+    logging:
+      level:
+        liquibase: DEBUG
+  jackson:
+    date-format: yyyy-MM-dd HH:mm:ss
+  mvc:
+    format:
+      date-time: yyyy-MM-dd HH:mm:ss
+
+
+  
 

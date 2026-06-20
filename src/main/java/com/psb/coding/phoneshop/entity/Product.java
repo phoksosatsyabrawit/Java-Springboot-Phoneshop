@@ -30,7 +30,7 @@ public class Product {
 	private String imagePath;
 	
 	@Column(name = "available_unit")
-	private String availableUnit;
+	private Integer availableUnit;
 	
 	@Column(name = "sale_price")
 	private BigDecimal salePrice;
