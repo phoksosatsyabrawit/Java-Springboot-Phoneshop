@@ -1,6 +1,9 @@
 package com.psb.coding.phoneshop.service;
 
 import java.util.List;
+import java.util.Map;
+
+import org.springframework.web.multipart.MultipartFile;
 
 import com.psb.coding.phoneshop.dto.PriceDTO;
 import com.psb.coding.phoneshop.dto.ProductDTO;
@@ -14,4 +17,6 @@ public interface ProductService {
 	List<ProductDTO> getProducts();
 	void imports(ProductImportHistoryDTO productHistoryDto);
 	void setSalePrice(Long id, PriceDTO priceDto);
+	Map<Integer, String> upload(MultipartFile file);
+	Product getByModelIdAndColorId(Long modelId, Long colorId);
 }

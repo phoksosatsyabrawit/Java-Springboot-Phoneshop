@@ -1,6 +1,7 @@
 package com.psb.coding.phoneshop.controller;
 
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -8,7 +9,9 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.multipart.MultipartFile;
 
 import com.psb.coding.phoneshop.dto.PriceDTO;
 import com.psb.coding.phoneshop.dto.ProductDTO;
@@ -51,5 +54,11 @@ public class ProductController {
 	public ResponseEntity<?> setSalePrice(@PathVariable Long productId,@Valid @RequestBody PriceDTO priceDto){
 		productService.setSalePrice(productId, priceDto);
 		return ResponseEntity.ok().build();
+	}
+	
+	@PostMapping("/uploads")
+	public ResponseEntity<?> upload(@RequestParam MultipartFile file){
+		Map<Integer, String> upload = productService.upload(file);
+		return ResponseEntity.ok(upload);
 	}
 }

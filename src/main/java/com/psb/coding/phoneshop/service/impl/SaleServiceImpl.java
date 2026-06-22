@@ -55,7 +55,8 @@ public class SaleServiceImpl implements SaleService {
 		// save sale
 		Sale sale = new Sale();
 		sale.setSaleDate(saleDto.getSaleDate());
-		saleRepository.save(sale);		// save sale_detail
+		saleRepository.save(sale);		
+		// save sale_detail
 		saleDto.getProducts().forEach(ps -> {
 			Product product = productMap.get(ps.getProductId());
 			SaleDetail saleDetail = new SaleDetail();
