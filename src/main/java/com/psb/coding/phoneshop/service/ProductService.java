@@ -16,7 +16,7 @@ public interface ProductService {
 	Product getById(Long id);
 	List<ProductDTO> getProducts();
 	void imports(ProductImportHistoryDTO productHistoryDto);
-	void setSalePrice(Long id, PriceDTO priceDto);
+	Product setSalePrice(Long id, PriceDTO priceDto);
 	Map<Integer, String> upload(MultipartFile file);
 	Product getByModelIdAndColorId(Long modelId, Long colorId);
 }

@@ -74,10 +74,20 @@ public class ProductServiceImpl implements ProductService {
 	}
 
 	@Override
-	public void setSalePrice(Long id, PriceDTO priceDto) {
+	public Product setSalePrice(Long id, PriceDTO priceDto) {
 		Product product = getById(id);
+		
+		// validate price before set
+		List<ProductImportHistory> productImports = productImportHistoryRepository.findByProductId(product.getId());
+		productImports.forEach(pi -> {
+			if(priceDto.getSalePrice().compareTo(pi.getPricePerUnit()) < 0) {
+				String price = "Invalid price %.2f";
+				throw new ApiException(HttpStatus.BAD_REQUEST, price.formatted(priceDto.getSalePrice()));
+			}
+		});
+		
 		product.setSalePrice(priceDto.getSalePrice());
-		productRepository.save(product);
+		return productRepository.save(product);
 	}
 
 	@Override

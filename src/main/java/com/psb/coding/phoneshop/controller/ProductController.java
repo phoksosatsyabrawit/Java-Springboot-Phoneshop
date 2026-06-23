@@ -52,8 +52,8 @@ public class ProductController {
 	
 	@PostMapping("{productId}/setSalePrice")
 	public ResponseEntity<?> setSalePrice(@PathVariable Long productId,@Valid @RequestBody PriceDTO priceDto){
-		productService.setSalePrice(productId, priceDto);
-		return ResponseEntity.ok().build();
+		Product setSalePrice = productService.setSalePrice(productId, priceDto);
+		return ResponseEntity.ok(setSalePrice);
 	}
 	
 	@PostMapping("/uploads")

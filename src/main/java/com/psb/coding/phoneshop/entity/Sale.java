@@ -14,12 +14,14 @@ import lombok.Data;
 @Data
 @Table(name = "sales")
 public class Sale {
-	
+
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "sale_id")
 	private Long id;
-	
+
 	@Column(name = "sale_date")
 	private LocalDateTime saleDate;
+
+	private Boolean isActive;
 }
