@@ -2,10 +2,10 @@ package com.psb.coding.phoneshop.projection;
 
 import java.math.BigDecimal;
 
-public interface ProductSale {// SPRING DATA HANDLES MAPPING AUTOMATICALLY
+public interface ProductSale { // spring data handle mapping implicitly
 
 	Long getProductId();
 	String getProductName();
-	Long getUnit();
-	BigDecimal getTotalAmount();
+	Integer getUnit();
+	BigDecimal getTotal();
 }

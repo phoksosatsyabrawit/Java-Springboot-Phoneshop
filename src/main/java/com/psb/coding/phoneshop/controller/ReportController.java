@@ -3,13 +3,13 @@ package com.psb.coding.phoneshop.controller;
 import java.time.LocalDate;
 import java.util.List;
 
-import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.psb.coding.phoneshop.dto.ProductReportDTO;
 import com.psb.coding.phoneshop.projection.ProductSale;
 import com.psb.coding.phoneshop.service.ReportService;
 
@@ -21,11 +21,16 @@ import lombok.RequiredArgsConstructor;
 public class ReportController {
 	
 	private final ReportService reportService;
+
+	@GetMapping("/productSales")
+	public ResponseEntity<?> getProductSale(@RequestParam LocalDate startDate, @RequestParam LocalDate endDate){
+		List<ProductSale> productSales = reportService.getProductSale(startDate, endDate);
+		return ResponseEntity.ok(productSales);
+	}
 	
-	@GetMapping("/productSale")
-	public ResponseEntity<?> getProductSaleReport(@RequestParam @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate startDate, 
-			@RequestParam @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate endDate){
-		List<ProductSale> productSaleReports = reportService.getProductSale(startDate, endDate);
-		return ResponseEntity.ok(productSaleReports);
+	@GetMapping("/productReports")
+	public ResponseEntity<?> getProductReport(@RequestParam LocalDate startDate, @RequestParam LocalDate endDate){
+		List<ProductReportDTO> productReport = reportService.getProductReport(startDate, endDate);
+		return ResponseEntity.ok(productReport);
 	}
 }
