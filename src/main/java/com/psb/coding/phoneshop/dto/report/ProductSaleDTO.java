@@ -1,4 +1,4 @@
-package com.psb.coding.phoneshop.dto;
+package com.psb.coding.phoneshop.dto.report;
 
 import lombok.Data;
 

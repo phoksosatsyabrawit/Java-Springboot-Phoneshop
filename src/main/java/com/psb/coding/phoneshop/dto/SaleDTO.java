@@ -4,6 +4,7 @@ import java.time.LocalDateTime;
 import java.util.List;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
+import com.psb.coding.phoneshop.dto.report.ProductSaleDTO;
 
 import lombok.Data;
 

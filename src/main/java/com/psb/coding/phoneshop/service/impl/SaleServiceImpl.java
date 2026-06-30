@@ -8,8 +8,8 @@ import java.util.stream.Collectors;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 
-import com.psb.coding.phoneshop.dto.ProductSaleDTO;
 import com.psb.coding.phoneshop.dto.SaleDTO;
+import com.psb.coding.phoneshop.dto.report.ProductSaleDTO;
 import com.psb.coding.phoneshop.entity.Product;
 import com.psb.coding.phoneshop.entity.Sale;
 import com.psb.coding.phoneshop.entity.SaleDetail;
