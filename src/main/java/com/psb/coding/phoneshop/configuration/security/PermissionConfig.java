@@ -8,7 +8,7 @@ import lombok.Getter;
 @AllArgsConstructor(access = AccessLevel.PRIVATE)
 public enum PermissionConfig {
 
-	BRAND_READ("brand:read"),
+	BRAND_READ("brand:read"), 
 	BRAND_WRITE("brand:write");
 	
 	private String description;
