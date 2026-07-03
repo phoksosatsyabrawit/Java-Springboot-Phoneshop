@@ -31,11 +31,11 @@ public class SecurityConfig {
 	}
 
 	@Bean
-	public DefaultSecurityFilterChain securityFilterChain(HttpSecurity http, AuthenticationManager authManager) throws Exception{
+	public DefaultSecurityFilterChain securityFilterChain(HttpSecurity http, AuthenticationManager auth) throws Exception{
 		http.csrf(csrf -> csrf.disable())
-			.addFilter(new JwtLoginFilter(authManager))
+			.addFilter(new JwtLoginFilter(auth))
 			.addFilterAfter(new TokenVerifyFilter(), JwtLoginFilter.class)
-			.sessionManagement(session -> session
+			.sessionManagement(s -> s
 					.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
 			.authorizeHttpRequests(authz -> authz
 					.requestMatchers("/login", "/welcome.html", "/css/**", "/js/**", "/swagger-ui/**", "/v3/api-docs*/**").permitAll()

@@ -29,17 +29,17 @@ public class TokenVerifyFilter extends OncePerRequestFilter {
 			filterChain.doFilter(request, response);
 			return;
 		}
-		String token = header.replace("Bearer " , "");
-		String key = "asdfghkl;asdfghkl;asdfghkl;asdfghkl;asdfghkl;";
+		String token = header.replace("Bearer ", "");
+		String key = "asdfghjkl;asdfghjkl;asdfghjkl;asdfghjkl;asdfghjkl;";
 		Claims payload = Jwts.parser()
-		.verifyWith(Keys.hmacShaKeyFor(key.getBytes()))
-		.build()
-		.parseSignedClaims(token)
-		.getPayload();
+			.verifyWith(Keys.hmacShaKeyFor(key.getBytes())) // set the signed key
+			.build() 										// build actual parser
+			.parseSignedClaims(token)						// parse & verify
+			.getPayload();									// get claims
 		String username = payload.getSubject();
-		List<String> authz = (List<String>) payload.get("Authorities");
-		List<SimpleGrantedAuthority> authzList = authz.stream()
-				.map(String::valueOf).map(SimpleGrantedAuthority::new).collect(Collectors.toList());
+		List<String> authorities = (List<String>) payload.get("Authorities");
+		List<SimpleGrantedAuthority> authzList = authorities.stream()
+				.map(SimpleGrantedAuthority::new).collect(Collectors.toList());
 		Authentication authentication = new UsernamePasswordAuthenticationToken(username, null, authzList);
 		SecurityContextHolder.getContext().setAuthentication(authentication);
 		filterChain.doFilter(request, response);

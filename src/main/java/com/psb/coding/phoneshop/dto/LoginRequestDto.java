@@ -1,4 +1,4 @@
-package com.psb.coding.phoneshop.configuration.security.jwt;
+package com.psb.coding.phoneshop.dto;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;

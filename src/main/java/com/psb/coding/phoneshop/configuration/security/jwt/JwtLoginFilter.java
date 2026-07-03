@@ -15,6 +15,7 @@ import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.psb.coding.phoneshop.dto.LoginRequestDto;
 
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.security.Keys;
@@ -27,20 +28,19 @@ import lombok.RequiredArgsConstructor;
 @RequiredArgsConstructor
 public class JwtLoginFilter extends UsernamePasswordAuthenticationFilter {
 	
-	private final AuthenticationManager authenticationManager; // authenticationManager will check up with SecurityConfig
-	
+	private final AuthenticationManager authenticationManager;
+
 	@Override
 	public Authentication attemptAuthentication(HttpServletRequest request, HttpServletResponse response)
 			throws AuthenticationException {
-		ObjectMapper mapper = new ObjectMapper();
+		// Deserialize json to java object
+		ObjectMapper map = new ObjectMapper();
 		try {
-			//deserialize json to object
-			LoginRequestDto loginRequestDto = mapper.readValue(request.getInputStream(), LoginRequestDto.class);
-			
-			Authentication authentication = new UsernamePasswordAuthenticationToken(loginRequestDto.getUsername(), loginRequestDto.getPassword());
+			LoginRequestDto login = map.readValue(request.getInputStream(), LoginRequestDto.class);
+			Authentication authentication = new UsernamePasswordAuthenticationToken(login.getUsername(), login.getPassword());
 			Authentication authenticate = authenticationManager.authenticate(authentication);
 			return authenticate;
-		} catch (Exception e) {
+		}catch (Exception e) {
 			throw new RuntimeException(e);
 		}
 	}
@@ -48,20 +48,19 @@ public class JwtLoginFilter extends UsernamePasswordAuthenticationFilter {
 	@Override
 	protected void successfulAuthentication(HttpServletRequest request, HttpServletResponse response, FilterChain chain,
 			Authentication authResult) throws IOException, ServletException {
-		List<@Nullable String> authoritiesList = authResult.getAuthorities().stream()
-		.map(GrantedAuthority::getAuthority).collect(Collectors.toList());
-		String key = "asdfghkl;asdfghkl;asdfghkl;asdfghkl;asdfghkl;";
+		String key = "asdfghjkl;asdfghjkl;asdfghjkl;asdfghjkl;asdfghjkl;";
+		List<@Nullable String> authzList = authResult.getAuthorities().stream()
+				.map(GrantedAuthority::getAuthority).collect(Collectors.toList());
 		String token = Jwts.builder()
-				//header
-				.subject(authResult.getName())
-				.issuedAt(new Date())			
-				//payload
-				.claim("Authorities", authoritiesList)
-				.expiration(java.sql.Date.valueOf(LocalDate.now().plusDays(7)))
-				.issuer("psb.com")
-				//sign
-				.signWith(Keys.hmacShaKeyFor(key.getBytes()))
-				.compact();
+			//payload
+			.subject(authResult.getName())
+			.issuedAt(new Date())
+			.claim("Authorities", authzList)
+			//sign
+			.signWith(Keys.hmacShaKeyFor(key.getBytes()))
+			.issuer("psb.com")
+			.expiration(java.sql.Date.valueOf(LocalDate.now().plusDays(7)))
+			.compact();
 		response.setHeader("Authorization", "Bearer " + token);
 	}
 }
