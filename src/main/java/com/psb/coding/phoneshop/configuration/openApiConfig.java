@@ -14,10 +14,10 @@ public class openApiConfig {
     public OpenAPI customOpenAPI() {
         return new OpenAPI()
                 .info(new Info()
-                        .title("Enterprise Order Management API")
+                        .title("Enterprise PhoneShop Management API")
                         .version("1.0.0")
                         .description("Production-grade API documentation for handling global warehouse orders.")
-                        .termsOfService("https://example.com")
+                        .termsOfService("https://psb.com")
                         .license(new License().name("Apache 2.0").url("https://springdoc.org")));
 	}
 }
