@@ -19,55 +19,47 @@ import com.psb.coding.phoneshop.configuration.security.jwt.TokenVerifyFilter;
 
 import lombok.RequiredArgsConstructor;
 
-
 @Configuration
 @EnableMethodSecurity(securedEnabled = true, prePostEnabled = true, jsr250Enabled = true)
 @RequiredArgsConstructor
 public class SecurityConfig {
-	
+
 	private final PasswordEncoder passwordEncoder;
 	private final UserDetailsService userDetailsService;
-	
+
 	@Bean
-	public AuthenticationManager authenticationManager(AuthenticationConfiguration config) throws Exception{
+	public AuthenticationManager authenticationManager(AuthenticationConfiguration config) throws Exception {
 		return config.getAuthenticationManager();
 	}
 
 	@Bean
-	public DefaultSecurityFilterChain securityFilterChain(HttpSecurity http, AuthenticationManager auth) throws Exception{
-		http.csrf(csrf -> csrf.disable())
-			.addFilter(new JwtLoginFilter(auth))
-			.addFilterAfter(new TokenVerifyFilter(), JwtLoginFilter.class)
-			.sessionManagement(s -> s
-					.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
-			.authorizeHttpRequests(authz -> authz
-					.requestMatchers("/login", "/welcome.html", "/css/**", "/js/**", "/swagger-ui/**", "/v3/api-docs*/**").permitAll()
-			.anyRequest().authenticated());
+	public DefaultSecurityFilterChain securityFilterChain(HttpSecurity http, AuthenticationManager auth)
+			throws Exception {
+		http.csrf(csrf -> csrf.disable()).addFilter(new JwtLoginFilter(auth))
+				.addFilterAfter(new TokenVerifyFilter(), JwtLoginFilter.class)
+				.sessionManagement(
+						s -> s.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
+				.authorizeHttpRequests(authz -> authz.requestMatchers("/login", "/welcome.html", "/css/**", "/js/**",
+						"/swagger-ui/**", "/v3/api-docs*/**").permitAll().anyRequest().authenticated());
 		return http.build();
 	}
-	
+
 	/*@Bean
 	public InMemoryUserDetailsManager userDetailService() {
-		UserDetails user1 = User.builder()
-				.username("sam")
-				.password(passwordEncoder.encode("sam123"))
-				.authorities(RoleConfig.ADMIN.getAuthorities())
-				.build();
-		UserDetails user2 = User.builder()
-				.username("tey")
-				.password(passwordEncoder.encode("tey123"))
-				.authorities(RoleConfig.SALE.getAuthorities())
-				.build();
+		UserDetails user1 = User.builder().username("sam").password(passwordEncoder.encode("sam123"))
+				.authorities(RoleConfig.ADMIN.getAuthorities()).build();
+		UserDetails user2 = User.builder().username("tey").password(passwordEncoder.encode("tey123"))
+				.authorities(RoleConfig.SALE.getAuthorities()).build();
 		return new InMemoryUserDetailsManager(user1, user2);
 	}*/
-	
+
 	public void configure(AuthenticationManagerBuilder auth) throws Exception {
 		auth.authenticationProvider(getAuthenticationProvider());
 	}
-	
+
 	public AuthenticationProvider getAuthenticationProvider() {
-		DaoAuthenticationProvider authenticationProvider = new DaoAuthenticationProvider(userDetailsService);
-		authenticationProvider.setPasswordEncoder(passwordEncoder);
-		return authenticationProvider;
+		DaoAuthenticationProvider daoAuthenticationProvider = new DaoAuthenticationProvider(userDetailsService);
+		daoAuthenticationProvider.setPasswordEncoder(passwordEncoder);
+		return daoAuthenticationProvider;
 	}
 }

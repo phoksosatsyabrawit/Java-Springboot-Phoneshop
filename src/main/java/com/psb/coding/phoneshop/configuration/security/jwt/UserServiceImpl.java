@@ -7,8 +7,9 @@ import org.springframework.stereotype.Service;
 
 import lombok.RequiredArgsConstructor;
 
-@Service
+
 @RequiredArgsConstructor
+@Service
 public class UserServiceImpl implements UserDetailsService {
 
 	private final UserService userService;
@@ -16,7 +17,7 @@ public class UserServiceImpl implements UserDetailsService {
 	@Override
 	public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
 		return userService.findUserByUsername(username)
-				.orElseThrow(() -> new UsernameNotFoundException("User not found"));
+				.orElseThrow(() -> new UsernameNotFoundException("User not found."));
 	}
 
 }

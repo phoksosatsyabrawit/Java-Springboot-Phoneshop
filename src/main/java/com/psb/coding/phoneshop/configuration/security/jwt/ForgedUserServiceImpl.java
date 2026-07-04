@@ -10,20 +10,19 @@ import com.psb.coding.phoneshop.configuration.security.RoleConfig;
 
 import lombok.RequiredArgsConstructor;
 
-@Service
 @RequiredArgsConstructor
+@Service
 public class ForgedUserServiceImpl implements UserService {
-	
+
 	private final PasswordEncoder passwordEncoder;
 
 	@Override
 	public Optional<UserAuthService> findUserByUsername(String username) {
 		List<UserAuthService> userAuthServices = List.of(
-					new UserAuthService("steve", passwordEncoder.encode("steve123"), RoleConfig.ADMIN.getAuthorities(), true, true, true, true),
-					new UserAuthService("lysa", passwordEncoder.encode("lysa123"), RoleConfig.SALE.getAuthorities(), true, true, true, true)
-				);
-		return userAuthServices.stream()
-				.filter(user -> user.getUsername().equals(username)).findFirst();
+				new UserAuthService("steve", passwordEncoder.encode("steve123"), RoleConfig.ADMIN.getAuthorities(),
+						true, true, true, true),
+				new UserAuthService("votey", passwordEncoder.encode("votey123"), RoleConfig.SALE.getAuthorities(), 
+						true, true, true, true));
+		return userAuthServices.stream().filter(u -> u.getUsername().equals(username)).findFirst();
 	}
-
 }

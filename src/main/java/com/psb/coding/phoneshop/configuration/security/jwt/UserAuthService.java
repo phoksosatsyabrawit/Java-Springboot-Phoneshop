@@ -13,7 +13,7 @@ import lombok.AllArgsConstructor;
 @SuppressWarnings("serial")
 @AllArgsConstructor
 public class UserAuthService implements UserDetails {
-	
+
 	private String username;
 	private String password;
 	private Set<SimpleGrantedAuthority> authorities;
@@ -21,7 +21,7 @@ public class UserAuthService implements UserDetails {
 	private boolean isAccountNonLocked;
 	private boolean isCredentialsNonExpired;
 	private boolean isEnabled;
-	
+
 	@Override
 	public Collection<? extends GrantedAuthority> getAuthorities() {
 		return authorities;
@@ -36,25 +36,25 @@ public class UserAuthService implements UserDetails {
 	public String getUsername() {
 		return username;
 	}
-	
+
 	@Override
 	public boolean isAccountNonExpired() {
 		return isAccountNonExpired;
 	}
-	
+
 	@Override
 	public boolean isAccountNonLocked() {
 		return isAccountNonLocked;
 	}
-	
+
 	@Override
 	public boolean isCredentialsNonExpired() {
 		return isCredentialsNonExpired;
 	}
-	
+
 	@Override
 	public boolean isEnabled() {
 		return isEnabled;
 	}
-	
+
 }
