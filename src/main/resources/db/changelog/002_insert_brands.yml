@@ -20,6 +20,7 @@ databaseChangeLog:
       id: 002_sync_brand_sequence
       author: phoksosatsyabrawit@gmail.com
       runAlways: true
+      dbms: postgresql
       changes:
         - sql:
            sql: >

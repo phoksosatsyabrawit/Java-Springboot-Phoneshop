@@ -9,10 +9,14 @@ import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
 import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.NoArgsConstructor;
 
 @SuppressWarnings("serial")
 @AllArgsConstructor
-public class UserAuthService implements UserDetails {
+@NoArgsConstructor
+@Builder
+public class UserAuth implements UserDetails {
 
 	private String username;
 	private String password;

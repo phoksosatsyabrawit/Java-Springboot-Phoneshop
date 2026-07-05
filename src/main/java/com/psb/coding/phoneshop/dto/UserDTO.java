@@ -1,0 +1,25 @@
+package com.psb.coding.phoneshop.dto;
+
+import java.time.LocalDate;
+
+import com.psb.coding.phoneshop.configuration.security.RoleConfig;
+
+import jakarta.persistence.EnumType;
+import jakarta.persistence.Enumerated;
+import lombok.Data;
+
+@Data
+public class UserDTO {
+
+	private String firstName;
+	private String LastName;
+	private String password;
+	private LocalDate dateOfBirth;
+	
+	@Enumerated(EnumType.STRING)
+	private RoleConfig role;
+	private Boolean isAccountNonExpired;
+	private Boolean isAccountNonLocked;
+	private Boolean isCredentialsNonExpired;
+	private Boolean isEnabled;
+}

@@ -37,10 +37,9 @@ public class SecurityConfig {
 			throws Exception {
 		http.csrf(csrf -> csrf.disable()).addFilter(new JwtLoginFilter(auth))
 				.addFilterAfter(new TokenVerifyFilter(), JwtLoginFilter.class)
-				.sessionManagement(
-						s -> s.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
+				.sessionManagement(s -> s.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
 				.authorizeHttpRequests(authz -> authz.requestMatchers("/login", "/welcome.html", "/css/**", "/js/**",
-						"/swagger-ui/**", "/v3/api-docs*/**").permitAll().anyRequest().authenticated());
+						"/swagger-ui/**", "/v3/api-docs*/**", "/users/**").permitAll().anyRequest().authenticated());
 		return http.build();
 	}
 
@@ -57,6 +56,7 @@ public class SecurityConfig {
 		auth.authenticationProvider(getAuthenticationProvider());
 	}
 
+	@Bean
 	public AuthenticationProvider getAuthenticationProvider() {
 		DaoAuthenticationProvider daoAuthenticationProvider = new DaoAuthenticationProvider(userDetailsService);
 		daoAuthenticationProvider.setPasswordEncoder(passwordEncoder);
