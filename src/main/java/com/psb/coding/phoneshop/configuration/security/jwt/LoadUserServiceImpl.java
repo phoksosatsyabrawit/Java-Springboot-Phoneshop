@@ -9,7 +9,6 @@ import com.psb.coding.phoneshop.service.UserService;
 
 import lombok.RequiredArgsConstructor;
 
-
 @RequiredArgsConstructor
 @Service
 public class LoadUserServiceImpl implements UserDetailsService {
