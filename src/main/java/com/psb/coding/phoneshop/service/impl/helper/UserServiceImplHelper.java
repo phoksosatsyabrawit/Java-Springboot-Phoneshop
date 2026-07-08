@@ -10,18 +10,17 @@ import com.psb.coding.phoneshop.entity.Role;
 
 public class UserServiceImplHelper {
 
-	public static Set<SimpleGrantedAuthority> getAuthority(Set<Role> roles){
+	public static Set<SimpleGrantedAuthority> getAuthority(Set<Role> roles) {
 		Set<SimpleGrantedAuthority> roleAuthz = roles.stream()
 				.map(role -> new SimpleGrantedAuthority("ROLE_" + role.getRole())).collect(Collectors.toSet());
-		Set<SimpleGrantedAuthority> authorities = roles.stream()
-				.flatMap(role -> toGetPermission(role)).collect(Collectors.toSet());
-		authorities.addAll(roleAuthz);
-		return authorities;
+		Set<SimpleGrantedAuthority> authz = roles.stream().flatMap(permissions -> toGetPermission(permissions))
+				.collect(Collectors.toSet());
+		authz.addAll(roleAuthz);
+		return authz;
 	}
-	
-	private static Stream<SimpleGrantedAuthority> toGetPermission(Role role){
-		Stream<SimpleGrantedAuthority> permissionMap = role.getPermissions().stream()
+
+	private static Stream<SimpleGrantedAuthority> toGetPermission(Role role) {
+		return role.getPermissions().stream()
 				.map(permission -> new SimpleGrantedAuthority(permission.getPermission()));
-		return permissionMap;
 	}
 }

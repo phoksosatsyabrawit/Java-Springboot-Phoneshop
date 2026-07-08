@@ -10,10 +10,9 @@ import org.springframework.security.core.authority.SimpleGrantedAuthority;
 
 import lombok.AccessLevel;
 import lombok.AllArgsConstructor;
-import lombok.Getter;
 
 @AllArgsConstructor(access = AccessLevel.PRIVATE)
-public enum RoleConfig {
+public enum RoleEnum {
 
 	ADMIN(Set.of(BRAND_READ, BRAND_WRITE)), 
 	SALE(Set.of(BRAND_READ));

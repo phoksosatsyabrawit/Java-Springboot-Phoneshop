@@ -13,13 +13,13 @@ import jakarta.persistence.MappedSuperclass;
 
 @EntityListeners(AuditingEntityListener.class)
 @MappedSuperclass
-public abstract class Audit { // not create object
+public abstract class Audit {
 
 	@CreatedDate
-	private LocalDateTime dateCreate;
+	private LocalDateTime createDate;
 	
 	@LastModifiedDate
-	private LocalDateTime dateUpdate;
+	private LocalDateTime updateDate;
 	
 	@CreatedBy
 	private String userCreate;

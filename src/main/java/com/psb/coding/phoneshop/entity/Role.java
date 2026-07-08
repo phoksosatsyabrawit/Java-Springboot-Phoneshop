@@ -22,7 +22,7 @@ public class Role {
 	private Long id;
 	
 	@Column(name = "role_name")
-	private String role;
+	private String Role;
 	
 	@ManyToMany
 	private Set<Permission> permissions;
