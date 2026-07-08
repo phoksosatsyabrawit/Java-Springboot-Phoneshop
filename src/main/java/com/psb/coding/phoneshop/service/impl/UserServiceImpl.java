@@ -11,6 +11,7 @@ import com.psb.coding.phoneshop.entity.User;
 import com.psb.coding.phoneshop.exception.ApiException;
 import com.psb.coding.phoneshop.repository.UserRepository;
 import com.psb.coding.phoneshop.service.UserService;
+import com.psb.coding.phoneshop.service.impl.helper.UserServiceImplHelper;
 
 import lombok.RequiredArgsConstructor;
 
@@ -28,7 +29,7 @@ public class UserServiceImpl implements UserService {
 		UserAuth userAuth = UserAuth.builder()
 				.username(user.getUsername())
 				.password(user.getPassword())
-				.authorities(user.getRole().getAuthorities())
+				.authorities(UserServiceImplHelper.getAuthority(user.getRoles()))
 				.isAccountNonExpired(true)
 				.isAccountNonLocked(true)
 				.isCredentialsNonExpired(true)

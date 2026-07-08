@@ -16,8 +16,6 @@ public class UserDTO {
 	private String password;
 	private LocalDate dateOfBirth;
 	
-	@Enumerated(EnumType.STRING)
-	private RoleConfig role;
 	private Boolean isAccountNonExpired;
 	private Boolean isAccountNonLocked;
 	private Boolean isCredentialsNonExpired;

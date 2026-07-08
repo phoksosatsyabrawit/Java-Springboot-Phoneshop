@@ -39,7 +39,7 @@ public class BrandController {
 	private final ModelService modelService;
 	private final ModelMapper modelMapper;
 	
-	@PreAuthorize("hasAnyRole('ROLE_ADMIN')")
+	@PreAuthorize("hasAnyRole('ROLE_Admin')")
 	@PostMapping
 	public ResponseEntity<?> createBrand(@RequestBody BrandDTO brandDTO){
 		Brand brand = BrandMapper.INSTANCE.toBrand(brandDTO);
@@ -54,7 +54,7 @@ public class BrandController {
 	}
 	
 	@Operation(summary = "Get Brands")
-	@PreAuthorize("hasAnyRole('ROLE_ADMIN', 'ROLE_SALE')")
+	@PreAuthorize("hasAnyRole('ROLE_Admin', 'ROLE_Sale')")
 	@GetMapping
 	public ResponseEntity<?> getBrands(@RequestParam Map<String, String> params){
 		Page<Brand> page = brandService.getBrands(params);
