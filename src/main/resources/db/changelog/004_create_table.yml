@@ -1,0 +1,115 @@
+databaseChangeLog:
+  - changeSet:
+      id: 004_create_table
+      author: phoksosatsyabrawit@gmail.com
+      changes:
+        - createTable:
+            tableName: colors
+            columns:
+              - column:
+                  autoIncrement: true
+                  constraints:
+                    primaryKey: true
+                  name: color_id
+                  type: BIGINT
+              - column:
+                  name: color_name
+                  type: VARCHAR(50)
+        - createTable:
+            tableName: products
+            columns:
+              - column:
+                  autoIncrement: true
+                  constraints:
+                    primaryKey: true
+                  name: product_id
+                  type: BIGINT
+              - column:
+                  name: product_name
+                  type: VARCHAR(50)
+              - column:
+                  name: image_path
+                  type: VARCHAR(50)
+              - column:
+                  name: available_unit
+                  type: INTEGER
+              - column:
+                  name: sale_price
+                  type: DECIMAL
+              - column:
+                  name: color_id
+                  type: BIGINT
+                  constraints:
+                    foreignKeyName: fk_products_colors
+                    references: colors(color_id)  
+              - column:
+                  name: model_id
+                  type: BIGINT
+                  constraints:
+                    foreignKeyName: fk_products_models
+                    references: models(model_id)
+        - createTable:
+            tableName: product_import_history
+            columns:
+              - column: 
+                  autoIncrement: true
+                  name: id
+                  type: BIGINT
+              - column:
+                  name: import_unit
+                  type: INTEGER
+              - column:
+                  name: date_import
+                  type: TIMESTAMPTZ
+              - column:
+                  name: price_per_unit
+                  type: DECIMAL
+              - column:
+                  name: product_id
+                  type: BIGINT
+                  constraints:
+                    foreignKeyName: fk_productImportHistory_products
+                    references: products(product_id)
+        - createTable:
+            tableName: sales
+            columns:
+              - column:
+                  autoIncrement: true
+                  constraints:
+                    primaryKey: true
+                  name: sale_id
+                  type: BIGINT
+              - column:
+                  name: sale_date
+                  type: TIMESTAMPTZ
+        - createTable:
+            tableName: sale_detail
+            columns:
+              - column:
+                  autoIncrement: true
+                  name: sale_detail_id
+                  type: BIGINT
+              - column:
+                  name: amount
+                  type: DECIMAL
+              - column:
+                  name: unit
+                  type: INTEGER
+              - column:
+                  name: sale_id
+                  type: BIGINT
+                  constraints:
+                    foreignKeyname: fk_saleDetail_sales
+                    references: sales(sale_id)
+              - column:
+                  name: product_id
+                  type: BIGINT
+                  constraints:
+                    foreignKeyname: fk_saleDetail_product
+                    references: products(product_id)
+
+
+           
+
+    
+

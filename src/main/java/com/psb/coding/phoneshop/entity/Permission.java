@@ -10,15 +10,14 @@ import lombok.Data;
 
 @Entity
 @Data
-@Table(name = "brands")
-public class Brand extends Audit{
-	
+@Table(name = "permissions")
+public class Permission {
+
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	@Column(name = "brand_id")
+	@Column(name = "permission_id")
 	private Long id;
 	
-	@Column(name = "brand_name")
-	private String name;
-
+	@Column(name = "permission_name")
+	private String permission;
 }

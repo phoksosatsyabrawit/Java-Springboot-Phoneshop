@@ -2,10 +2,27 @@ spring:
   datasource:
     url: jdbc:postgresql://localhost:5432/phoneshop
     username: admin
-    password: braw$tadmin95
+    password: brawitadmin95
+  liquibase:
+    enabled: false
+    change-log: classpath:db/changelog/db.changelog-master.yml
   jpa:
     properties:
-     hibernate:
-     dialect: org.hibernate.dialect.PostgreSQLDialect
+      hibernate:
+        dialect: org.hibernate.dialect.PostgreSQLDialect
     hibernate:
       ddl-auto: update
+    open-in-view: true
+  jackson:
+    date-format: yyyy-MM-dd HH:mm:ss
+  mvc:
+    format:
+      date-time: yyyy-MM-dd HH:mm:ss
+logging:
+      level:
+        liquibase: DEBUG
+  
+
+
+  
+
