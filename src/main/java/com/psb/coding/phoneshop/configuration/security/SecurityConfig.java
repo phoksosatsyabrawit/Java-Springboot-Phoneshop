@@ -38,7 +38,7 @@ public class SecurityConfig {
 				.addFilterAfter(new TokenVerifyFilter(), JwtLoginFilter.class)
 				.sessionManagement(s -> s.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
 				.authorizeHttpRequests(authz -> authz.requestMatchers("/login", "/welcome.html", "/css/**", "/js/**",
-						"/swagger-ui/**", "/v3/api-docs*/**", "/users/**").permitAll().anyRequest().authenticated());
+						"/swagger-ui/**", "/v3/api-docs*/**", "/users/**", "/brands/**").permitAll().anyRequest().authenticated());
 		return http.build();
 	}
 

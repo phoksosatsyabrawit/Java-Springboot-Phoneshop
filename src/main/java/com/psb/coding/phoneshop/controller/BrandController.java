@@ -29,7 +29,9 @@ import com.psb.coding.phoneshop.service.ModelService;
 
 import io.swagger.v3.oas.annotations.Operation;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 
+@Slf4j
 @RequiredArgsConstructor
 @RestController
 @RequestMapping(path = "/brands")
@@ -39,9 +41,10 @@ public class BrandController {
 	private final ModelService modelService;
 	private final ModelMapper modelMapper;
 	
-	@PreAuthorize("hasAnyRole('ROLE_Admin')")
+	//@PreAuthorize("hasAnyRole('ROLE_Admin')")
 	@PostMapping
 	public ResponseEntity<?> createBrand(@RequestBody BrandDTO brandDTO){
+		log.info("Create brand");
 		Brand brand = BrandMapper.INSTANCE.toBrand(brandDTO);
 		Brand brands = brandService.create(brand);
 		return ResponseEntity.ok(brands);
@@ -54,7 +57,7 @@ public class BrandController {
 	}
 	
 	@Operation(summary = "Get Brands")
-	@PreAuthorize("hasAnyRole('ROLE_Admin', 'ROLE_Sale')")
+	//@PreAuthorize("hasAnyRole('ROLE_Admin', 'ROLE_Sale')")
 	@GetMapping
 	public ResponseEntity<?> getBrands(@RequestParam Map<String, String> params){
 		Page<Brand> page = brandService.getBrands(params);

@@ -27,7 +27,6 @@ import lombok.RequiredArgsConstructor;
 @Service
 public class SaleServiceImpl implements SaleService {
 
-	// private final ProductRepository productRepository;
 	private final SaleRepository saleRepository;
 	private final SaleDetailRepository saleDetailRepository;
 	private final ProductService productService;
