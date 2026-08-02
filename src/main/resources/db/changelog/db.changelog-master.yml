@@ -7,10 +7,3 @@ databaseChangeLog:
       file: db/changelog/003_rename_models_column.yml
   - include:
      file: db/changelog/004_create_table.yml
-  - include:
-      file: db/changelog/005_rename_importDate_column.yml
-  - include:
-      file: db/changelog/007_add_sales_column_is_active.yml
-  - include:
-      file: db/changelog/008_create_table_users.yml
-

@@ -59,7 +59,7 @@ databaseChangeLog:
                   name: import_unit
                   type: INTEGER
               - column:
-                  name: date_import
+                  name: import_date
                   type: TIMESTAMPTZ
               - column:
                   name: price_per_unit
@@ -82,6 +82,9 @@ databaseChangeLog:
               - column:
                   name: sale_date
                   type: TIMESTAMPTZ
+              - column:
+                  name: is_active
+                  type: BOOLEAN
         - createTable:
             tableName: sale_detail
             columns:
@@ -107,6 +110,45 @@ databaseChangeLog:
                   constraints:
                     foreignKeyname: fk_saleDetail_product
                     references: products(product_id)
+        - createTable:
+            tableName: users
+            columns:
+              - column:
+                  autoIncrement: true
+                  constraints:
+                     primaryKey: true
+                  name: user_id
+                  type: BIGINT
+              - column:
+                  name: first_name
+                  type: VARCHAR(25)
+              - column:
+                  name: last_name
+                  type: VARCHAR(25)
+              - column:
+                  name: username
+                  type: VARCHAR(25)
+              - column:
+                  name: password
+                  type: VARCHAR(256)
+              - column:
+                  name: date_of_birth
+                  type: DATE
+              - column:
+                  name: role
+                  type: VARCHAR(25)
+              - column:
+                  name: is_account_non_expired
+                  type: BOOLEAN
+              - column:
+                  name: is_account_non_locked
+                  type: BOOLEAN
+              - column:
+                  name: is_credentials_non_expired
+                  type: BOOLEAN
+              - column:
+                  name: is_enalbed
+                  type: BOOLEAN
 
 
            
