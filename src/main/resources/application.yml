@@ -1,6 +1,6 @@
 spring:
   datasource:
-    url: jdbc:postgresql://localhost:5432/phoneshop
+    url: jdbc:postgresql://localhost:5433/phoneshop
     username: admin
     password: brawitadmin95
   liquibase:
@@ -11,7 +11,7 @@ spring:
       hibernate:
         dialect: org.hibernate.dialect.PostgreSQLDialect
     hibernate:
-      ddl-auto: update
+      ddl-auto: none
     open-in-view: true
   jackson:
     date-format: yyyy-MM-dd HH:mm:ss
@@ -19,10 +19,5 @@ spring:
     format:
       date-time: yyyy-MM-dd HH:mm:ss
 logging:
-      level:
-        liquibase: DEBUG
-  
-
-
-  
-
+  level:
+    liquibase: DEBUG
