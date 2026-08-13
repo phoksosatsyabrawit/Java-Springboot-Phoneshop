@@ -1,5 +1,5 @@
 services:
-  postgres:
+  db:
     image: 'postgres:15.3'
     environment:
       - 'POSTGRES_USER=admin'
@@ -7,7 +7,7 @@ services:
       - 'POSTGRES_DB=phoneshop'
     ports:
       - '5433:5432'
-  pg-admin:
+  web:
     image: 'dpage/pgadmin4:6'
     environment:
         - 'PGADMIN_DEFAULT_EMAIL=superadmin@gmail.com'

@@ -19,10 +19,5 @@ spring:
     format:
       date-time: yyyy-MM-dd HH:mm:ss
 logging:
-      level:
-        liquibase: DEBUG
-  
-
-
-  
-
+  level:
+    liquibase: DEBUG
