@@ -40,8 +40,10 @@ public class UserServiceImpl implements UserService {
 
 	@Override
 	public User createUser(User user) {
-		String username = "%s".formatted(user.getFirstName());
-		user.setUsername(username);
+		/*
+		 * String username = "%s".formatted(user.getFirstName());
+		 * user.setUsername(username);
+		 */
 		return userRepository.save(user);
 	}
 }
