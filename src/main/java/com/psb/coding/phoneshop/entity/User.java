@@ -9,6 +9,8 @@ import jakarta.persistence.FetchType;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.JoinTable;
 import jakarta.persistence.ManyToMany;
 import jakarta.persistence.Table;
 import lombok.Data;
@@ -30,13 +32,14 @@ public class User {
 	private LocalDate dateOfBirth;
 
 	@ManyToMany(fetch = FetchType.EAGER)
+	@JoinTable(
+			name = "user_roles",
+			joinColumns = @JoinColumn(name = "user_id"),
+			inverseJoinColumns = @JoinColumn(name = "role_id")
+	)
 	private Set<Role> roles;
-	@Column(name = "is_account_non_expired")
 	private Boolean isAccountNonExpired;
-	@Column(name = "is_account_non_locked")
 	private Boolean isAccountNonLocked;
-	@Column(name = "is_credentials_non_expired")
 	private Boolean isCredentialsNonExpired;
-	@Column(name = "is_enabled")
 	private Boolean isEnabled;
 }
