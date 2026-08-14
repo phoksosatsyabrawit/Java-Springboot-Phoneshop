@@ -26,6 +26,7 @@ public class User {
 	private String LastName;
 	private String username;
 	private String password;
+	private String email;
 	private LocalDate dateOfBirth;
 	
 	@ManyToMany(fetch = FetchType.EAGER)

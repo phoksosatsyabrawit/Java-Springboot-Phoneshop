@@ -6,7 +6,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.psb.coding.phoneshop.dto.UserDTO;
+import com.psb.coding.phoneshop.dto.UserV1DTO;
 import com.psb.coding.phoneshop.entity.User;
 import com.psb.coding.phoneshop.mapper.UserMapper;
 import com.psb.coding.phoneshop.service.UserService;
@@ -22,9 +22,9 @@ public class UserController {
 	private final UserMapper userMapper;
 
 	@PostMapping
-	public ResponseEntity<?> createUser(@RequestBody UserDTO userDTO){
+	public ResponseEntity<?> createUser(@RequestBody UserV1DTO userDTO){
 		User user = userMapper.toUser(userDTO);
 		user = userService.createUser(user);
-		return ResponseEntity.ok(userMapper.toUserDTO(user));
+		return ResponseEntity.ok(userMapper.toUserV1DTO(user));
 	}
 }
