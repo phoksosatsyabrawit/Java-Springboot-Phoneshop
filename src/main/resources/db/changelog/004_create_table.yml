@@ -110,7 +110,7 @@ databaseChangeLog:
                   constraints:
                     foreignKeyname: fk_saleDetail_product
                     references: products(product_id)
-        - createTable:
+        - createTable: 
             tableName: users
             columns:
               - column:
@@ -149,7 +149,6 @@ databaseChangeLog:
               - column:
                   name: is_enalbed
                   type: BOOLEAN
-
 
            
 
