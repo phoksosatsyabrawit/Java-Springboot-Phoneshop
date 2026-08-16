@@ -7,6 +7,7 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import com.psb.coding.phoneshop.configuration.security.RoleEnum;
+import com.psb.coding.phoneshop.dto.UserV1DTO;
 import com.psb.coding.phoneshop.entity.User;
 import com.psb.coding.phoneshop.service.UserService;
 
@@ -21,7 +22,7 @@ public class ForgedUserServiceImpl implements UserService {
 	@Override
 	public Optional<UserAuth> findUserByUsername(String username) {
 		List<UserAuth> userAuthServices = List.of(
-				new UserAuth("steve", passwordEncoder.encode("steve123"), RoleEnum.ADMIN.getAuthorities(),
+				new UserAuth("steve", passwordEncoder.encode("steve123"), RoleEnum.FINANCE.getAuthorities(),
 						true, true, true, true),
 				new UserAuth("votey", passwordEncoder.encode("votey123"), RoleEnum.SALE.getAuthorities(), 
 						true, true, true, true));
@@ -29,7 +30,7 @@ public class ForgedUserServiceImpl implements UserService {
 	}
 
 	@Override
-	public User createUser(User user) {
+	public User createUser(UserV1DTO dto) {
 		return null;
 	}
 }

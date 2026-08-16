@@ -21,3 +21,11 @@ databaseChangeLog:
           file: db/changelog/010_alter_column_password.yml
     - include:
           file: db/changelog/011_create_table_user_roles.yml
+    - include:
+          file: db/changelog/012_create_roles_permissions_join_table.yml
+    - include:
+          file: db/changelog/013_create_table_user_roles2.yml
+    - include:
+          file: db/changelog/014_create_table_user_roles3.yml
+    - include:
+          file: db/changelog/015_create_table_user_roles4.yml
